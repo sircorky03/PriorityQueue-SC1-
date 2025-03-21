@@ -36,7 +36,53 @@ namespace PriorityQueue
 
         public void Remove()
         {
-            throw new NotImplementedException();
+            //throw exception if empty
+            if (IsEmpty())
+            {
+                throw new QueueUnderflowException();
+            }
+
+            int highestPriorityIndex = 0;
+            for (int i = 1; i <= tailIndex; i++)
+            {
+                if (storage[i].Priority > storage[highestPriorityIndex].Priority)
+                {
+                    highestPriorityIndex = i;
+                }
+            }
+
+            //shift elements to remove the highest priority item
+            for (int i = highestPriorityIndex; i < tailIndex; i++)
+            {
+                storage[i] = storage[i + 1];
+            }
+
+            tailIndex++;
+        }
+
+        public override string ToString()
+        {
+            if (IsEmpty())
+            {
+                throw new QueueUnderflowException("No items to display");
+            }
+
+            string result = "[";
+            for (int i = 0; i <= tailIndex; i++)
+            {
+                if (i > 0)
+                {
+                    result += ", ";
+                }
+                result += storage[i];
+            }
+            result += "]";
+            return result;
+        }
+
+        public bool IsEmpty()
+        {
+            return tailIndex < 0;
         }
     }
 }
