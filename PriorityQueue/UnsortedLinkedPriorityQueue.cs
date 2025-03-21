@@ -78,7 +78,7 @@ namespace PriorityQueue
                 throw new QueueUnderflowException();
             }
 
-            if(head.Next != null)
+            if(head == null)
             {
                 head = null;
                 count--;
@@ -111,7 +111,7 @@ namespace PriorityQueue
             while (current != highestPriorityItem)
             {
                 previous = current;
-                previous.Next = current.Next;
+                current = current.Next;
             }
 
             previous.Next = current.Next;
