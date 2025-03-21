@@ -8,10 +8,11 @@ namespace PriorityQueue
 {
     public class HeapPriorityQueue<T> : PriorityQueue<T>
     {
-        private readonly PriorityItem<T>[] heap;
-        private readonly int capacity;
-        private int count;
+        private readonly PriorityItem<T>[] heap;    //array representing the heap
+        private readonly int capacity;  //max capacity of the heap
+        private int count;  //current no. of elements in the heap
 
+        //constructor initialises heap with a given size
         public HeapPriorityQueue(int size)
         {
             capacity = size;
@@ -19,6 +20,7 @@ namespace PriorityQueue
             count = 0;
         }
 
+        //add a new item with a priority to the heap
         public void Add(T item, int priority)
         {
             //throw exception if too many items added to the queue
@@ -29,10 +31,11 @@ namespace PriorityQueue
 
             PriorityItem<T> newItem = new PriorityItem<T>(item, priority);
             heap[count] = newItem;
-            HeapifyUp(count);
+            HeapifyUp(count);   //maintain heap property after insertion
             count++;
         }
 
+        //returns item with the highest priority (root of the heap)
         public T Head()
         {
             if (IsEmpty())
@@ -42,12 +45,13 @@ namespace PriorityQueue
             return heap[0].Item;
         }
 
+        //checks if heap is empty
         public bool IsEmpty()
         {
             return count == 0;
         }
 
-        //called if the queue is empty
+        //removes item of the highest priority (root of the heap)
         public void Remove()
         {
             if (IsEmpty())
@@ -55,11 +59,12 @@ namespace PriorityQueue
                 throw new QueueUnderflowException();
             }
 
-            heap[0] = heap[count - 1];
+            heap[0] = heap[count - 1];  //replace root with the last element
             count--;
-            HeapifyDown(0);
+            HeapifyDown(0); //maintain heap property after removal
         }
 
+        //covert the heap to string format
         public override string ToString()
         {
             if (IsEmpty())
@@ -80,6 +85,7 @@ namespace PriorityQueue
             return result;
         }
 
+        //maintains heap property after insertion
         private void HeapifyUp(int index)
         {
             while (index > 0)
@@ -94,6 +100,7 @@ namespace PriorityQueue
             }
         }
 
+        //maintains heap property after removal
         private void HeapifyDown(int index)
         {
             while (true)
@@ -122,6 +129,7 @@ namespace PriorityQueue
             }
         }
 
+        //swaps 2 elements in the heap
         private void Swap(int index1, int index2)
         {
             PriorityItem<T> temp = heap[index1];

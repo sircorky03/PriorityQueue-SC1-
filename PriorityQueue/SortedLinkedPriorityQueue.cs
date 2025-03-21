@@ -8,7 +8,7 @@ namespace PriorityQueue
 {
     public class SortedLinkedPriorityQueue<T> : PriorityQueue<T>
     {
-        private PriorityItem<T> head; //corrected head variable type
+        private PriorityItem<T> head;
         private readonly int capacity;
         private int count;
 
@@ -19,7 +19,7 @@ namespace PriorityQueue
             count = 0;
         }
 
-        //the item at the front of the queue
+        //returns item at the front of the queue
         public T Head()
         {
             if (IsEmpty())
@@ -29,6 +29,7 @@ namespace PriorityQueue
             return head.Item;
         }
 
+        //adds an item to the queue, maintaining order based on priority
         public void Add(T item, int priority)
         {
             if (count >= capacity)
@@ -38,6 +39,7 @@ namespace PriorityQueue
 
             PriorityItem<T> newItem = new PriorityItem<T>(item, priority);
 
+            //if the queue is empty or the new item has the highest priority, insert it at the head
             if (head == null || priority > head.Priority)
             {
                 newItem.Next = head;
@@ -45,6 +47,7 @@ namespace PriorityQueue
             }
             else
             {
+                //find the correct position to insert the new item to maintain sorted order
                 PriorityItem<T> current = head;
                 while (current.Next != null && current.Next.Priority >= priority)
                 {
@@ -56,11 +59,13 @@ namespace PriorityQueue
             count++;
         }
 
+        //checks if the queue is empty
         public bool IsEmpty()
         {
             return count == 0;
         }
 
+        //removes the item at the front of the queue (highest priority)
         public void Remove()
         {
             if (IsEmpty())
@@ -71,6 +76,7 @@ namespace PriorityQueue
             count--;
         }
 
+        //converts the queue to string format
         public override string ToString()
         {
             if (IsEmpty())
