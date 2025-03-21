@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PriorityQueue
 {
-    internal class UnsortedLinkedPriorityQueue<T> : PriorityQueue<T>
+    public class UnsortedLinkedPriorityQueue<T> : PriorityQueue<T>
     {
         private PriorityItem<T> head;
         private readonly int capacity;
