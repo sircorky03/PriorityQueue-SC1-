@@ -4,6 +4,7 @@
     {
         public T Item { get; }
         public int Priority { get; }
+        public PriorityItem<T> Next { get; set; }
 
         public PriorityItem(T item, int priority)
         {
