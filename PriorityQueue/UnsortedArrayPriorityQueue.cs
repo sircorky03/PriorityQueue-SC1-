@@ -21,17 +21,32 @@ namespace PriorityQueue
 
         public void Add(T item, int priority)
         {
-            throw new NotImplementedException();
+            tailIndex++;
+            if (tailIndex >= capacity)
+            {
+                tailIndex--;
+                throw new QueueOverflowException();
+            }
+
+            storage[tailIndex] = new PriorityItem<T>(item, priority);
         }
 
         public T Head()
         {
-            throw new NotImplementedException();
-        }
+            if (IsEmpty())
+            {
+                throw new QueueUnderflowException();
+            }
 
-        public bool IsEmpty()
-        {
-            throw new NotImplementedException();
+            int highestPriorityIndex = 0;
+            for (int i = 1; i <= tailIndex; i++)
+            {
+                if (storage[i].Priority > storage[highestPriorityIndex].Priority)
+                {
+                    highestPriorityIndex = i;
+                }
+            }
+            return storage[highestPriorityIndex].Item;
         }
 
         public void Remove()
