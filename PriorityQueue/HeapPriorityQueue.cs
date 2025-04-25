@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PriorityQueue
 {
-    public class HeapPriorityQueue<T> : PriorityQueue<T>
+    public class HeapPriorityQueue<T> : IPriorityQueue<T>
     {
         private readonly PriorityItem<T>[] heap;    //array representing the heap
         private readonly int capacity;  //max capacity of the heap
@@ -135,6 +135,11 @@ namespace PriorityQueue
             PriorityItem<T> temp = heap[index1];
             heap[index1] = heap[index2];
             heap[index2] = temp;
+        }
+
+        public int Count()
+        {
+            return count;
         }
     }
 }

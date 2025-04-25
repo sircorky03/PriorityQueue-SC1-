@@ -1,6 +1,6 @@
 ﻿namespace PriorityQueue
 {
-    public interface PriorityQueue<T>
+    public interface IPriorityQueue<T>
     {
         void Add(T item, int priority);
 
